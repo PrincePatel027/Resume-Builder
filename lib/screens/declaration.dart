@@ -1,7 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:flutter/widgets.dart';
 import 'package:resume_builder/fonts/fonts.dart';
-import 'package:resume_builder/screens/contact_info.dart';
 import 'package:resume_builder/utils/utils.dart';
 import 'package:resume_builder/widgets/appBar.dart';
 import 'package:top_snackbar_flutter/custom_snack_bar.dart';
