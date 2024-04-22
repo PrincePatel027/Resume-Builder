@@ -197,6 +197,10 @@ class _ContactInfoState extends State<ContactInfo> {
               onPressed: () {
                 if (formKey.currentState!.validate()) {
                   formKey.currentState!.save();
+                  ContactInfoData.address = addressController.text;
+                  ContactInfoData.name = nameController.text;
+                  ContactInfoData.phoneNum = phoneController.text;
+                  ContactInfoData.email = emailController.text;
                   showTopSnackBar(
                     Overlay.of(context),
                     const CustomSnackBar.success(

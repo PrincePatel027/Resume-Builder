@@ -111,3 +111,73 @@ class ContactInfoData {
     TextEditingController(),
   ];
 }
+
+class ResumeData {
+  String? name;
+  String? email;
+  String? phoneNum;
+  String? address;
+  File? imagePath;
+  String? careerObjective;
+  String? currentDesignation;
+  String? dateOfBirth;
+  String? maritalStatus;
+  List? languageKnown;
+  String? nationality;
+  String? courseDegree;
+  String? schoolCollage;
+  String? percentage;
+  String? yearOfPass;
+  String? companyName;
+  String? work;
+  String? rolesOptional;
+  String? employeeStatus;
+  String? dateJoined;
+  String? dateExit;
+  String? projectTitle;
+  List<String> technologiesList;
+  String? roles;
+  String? technologys;
+  String? projectDescription;
+  String? refranceName;
+  String? designation;
+  String? organizationInstitude;
+  String? description;
+  String? dateDeclaration;
+  String? cityDeclaration;
+
+  ResumeData({
+    required this.name,
+    required this.email,
+    required this.phoneNum,
+    required this.address,
+    required this.imagePath,
+    required this.careerObjective,
+    required this.currentDesignation,
+    required this.dateOfBirth,
+    required this.maritalStatus,
+    required this.languageKnown,
+    required this.nationality,
+    required this.courseDegree,
+    required this.schoolCollage,
+    required this.percentage,
+    required this.yearOfPass,
+    required this.companyName,
+    required this.work,
+    required this.rolesOptional,
+    required this.employeeStatus,
+    required this.dateJoined,
+    required this.dateExit,
+    required this.projectTitle,
+    required this.technologiesList,
+    required this.roles,
+    required this.technologys,
+    required this.projectDescription,
+    required this.refranceName,
+    required this.designation,
+    required this.organizationInstitude,
+    required this.description,
+    required this.dateDeclaration,
+    required this.cityDeclaration,
+  });
+}

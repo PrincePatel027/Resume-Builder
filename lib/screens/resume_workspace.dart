@@ -1,5 +1,4 @@
 import 'package:flutter/material.dart';
-import 'package:flutter/widgets.dart';
 import 'package:resume_builder/fonts/fonts.dart';
 import 'package:resume_builder/utils/utils.dart';
 import 'package:resume_builder/widgets/appBar.dart';

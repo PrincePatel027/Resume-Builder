@@ -1,232 +1,232 @@
+import 'dart:io';
 import 'package:flutter/material.dart';
+import 'package:path_provider/path_provider.dart';
+import 'package:pdf/pdf.dart';
+import 'package:pdf/widgets.dart' as pw;
 import 'package:resume_builder/utils/utils.dart';
 
-class PdfDesign extends StatefulWidget {
+class PdfDesign extends StatelessWidget {
   const PdfDesign({super.key});
 
   @override
-  State<PdfDesign> createState() => _PdfDesignState();
-}
-
-class _PdfDesignState extends State<PdfDesign> {
-  @override
   Widget build(BuildContext context) {
+    final resumeData = ResumeData(
+      name: ContactInfoData.name,
+      email: ContactInfoData.email,
+      phoneNum: ContactInfoData.phoneNum,
+      address: ContactInfoData.address,
+      imagePath: ContactInfoData.imagePath,
+      careerObjective: ContactInfoData.careerObjective,
+      currentDesignation: ContactInfoData.currentDesignation,
+      dateOfBirth: ContactInfoData.dateOfBirth,
+      maritalStatus: ContactInfoData.maritalStatus,
+      languageKnown: ContactInfoData.languageKnown,
+      nationality: ContactInfoData.nationality,
+      courseDegree: ContactInfoData.courseDegree,
+      schoolCollage: ContactInfoData.schoolCollage,
+      percentage: ContactInfoData.percentage,
+      yearOfPass: ContactInfoData.yearOfPass,
+      companyName: ContactInfoData.companyName,
+      work: ContactInfoData.work,
+      rolesOptional: ContactInfoData.rolesOptional,
+      employeeStatus: ContactInfoData.employeeStatus,
+      dateJoined: ContactInfoData.dateJoined,
+      dateExit: ContactInfoData.dateExit,
+      projectTitle: ContactInfoData.projectTitle,
+      technologiesList: ContactInfoData.technologiesList,
+      roles: ContactInfoData.roles,
+      technologys: ContactInfoData.technologys,
+      projectDescription: ContactInfoData.projectDescription,
+      refranceName: ContactInfoData.refranceName,
+      designation: ContactInfoData.designation,
+      organizationInstitude: ContactInfoData.organizationInstitude,
+      description: ContactInfoData.description,
+      dateDeclaration: ContactInfoData.dateDeclaration,
+      cityDeclaration: ContactInfoData.cityDeclaration,
+    );
+
     return Scaffold(
-      body: Padding(
-        padding: const EdgeInsets.all(16.0),
-        child: SingleChildScrollView(
-          child: Column(
-            crossAxisAlignment: CrossAxisAlignment.start,
+      body: Center(
+        child: ElevatedButton(
+          onPressed: () {
+            generateAndSavePDF(resumeData);
+          },
+          child: const Text('Generate PDF'),
+        ),
+      ),
+    );
+  }
+
+  Future<void> generateAndSavePDF(ResumeData resumeData) async {
+    final pdf = pw.Document();
+    pdf.addPage(
+      pw.Page(
+        build: (pw.Context context) {
+          return pw.Column(
+            crossAxisAlignment: pw.CrossAxisAlignment.start,
             children: [
-              Container(
+              pw.Container(
                 padding:
-                    const EdgeInsets.symmetric(horizontal: 15, vertical: 10),
-                decoration: BoxDecoration(
-                  color: Colors.amber,
-                  borderRadius: BorderRadius.circular(10),
+                    const pw.EdgeInsets.symmetric(horizontal: 15, vertical: 10),
+                decoration: pw.BoxDecoration(
+                  color: PdfColors.amber,
+                  borderRadius: pw.BorderRadius.circular(10),
                 ),
-                child: Text(
-                  '${ContactInfoData.name ?? ''}',
-                  style: const TextStyle(
+                child: pw.Text(
+                  "${resumeData.name}",
+                  style: pw.TextStyle(
                     fontSize: 24.0,
-                    fontWeight: FontWeight.bold,
+                    fontWeight: pw.FontWeight.bold,
                   ),
                 ),
               ),
-              const SizedBox(height: 8.0),
-              Text(
-                '${ContactInfoData.currentDesignation ?? ''}',
-                style: const TextStyle(
+              pw.SizedBox(height: 8.0),
+              pw.Text(
+                "${resumeData.currentDesignation}",
+                style: pw.TextStyle(
                   fontSize: 18.0,
-                  fontStyle: FontStyle.italic,
+                  fontStyle: pw.FontStyle.italic,
                 ),
               ),
-              const SizedBox(height: 16.0),
-              const Text(
+              pw.SizedBox(height: 16.0),
+              pw.Text(
                 'CONTACT',
-                style: TextStyle(
+                style: pw.TextStyle(
                   fontSize: 14.0,
-                  fontWeight: FontWeight.bold,
+                  fontWeight: pw.FontWeight.bold,
                 ),
               ),
-              const SizedBox(height: 8.0),
-              Text('${ContactInfoData.phoneNum ?? ''}',
-                  style: const TextStyle(fontSize: 12.0)),
-              Text(
-                '${ContactInfoData.email ?? ''}',
-                style: const TextStyle(fontSize: 12.0),
-              ),
-              Text(
-                '${ContactInfoData.address ?? ''}',
-                style: const TextStyle(fontSize: 12.0),
-              ),
-              const SizedBox(height: 16.0),
-              const Text(
+              pw.SizedBox(height: 8.0),
+              pw.Text("${resumeData.phoneNum}",
+                  style: const pw.TextStyle(fontSize: 12.0)),
+              pw.Text("${resumeData.email}",
+                  style: const pw.TextStyle(fontSize: 12.0)),
+              pw.Text("${resumeData.address}",
+                  style: const pw.TextStyle(fontSize: 12.0)),
+              pw.SizedBox(height: 16.0),
+              pw.Text(
                 'EDUCATION',
-                style: TextStyle(
+                style: pw.TextStyle(
                   fontSize: 14.0,
-                  fontWeight: FontWeight.bold,
+                  fontWeight: pw.FontWeight.bold,
                 ),
               ),
-              const SizedBox(height: 8.0),
-              Text(
-                '${ContactInfoData.courseDegree ?? ''}\n${ContactInfoData.schoolCollage ?? ''}\n${ContactInfoData.yearOfPass ?? ''}',
-                style: TextStyle(fontSize: 12.0),
+              pw.SizedBox(height: 8.0),
+              pw.Bullet(
+                text:
+                    '* ${resumeData.courseDegree}\n* ${resumeData.schoolCollage}\n* ${resumeData.yearOfPass}',
               ),
-              SizedBox(height: 16.0),
-              Text(
+              pw.SizedBox(height: 16.0),
+              pw.Text(
                 'EXPERTISE',
-                style: TextStyle(
+                style: pw.TextStyle(
                   fontSize: 14.0,
-                  fontWeight: FontWeight.bold,
+                  fontWeight: pw.FontWeight.bold,
                 ),
               ),
-              SizedBox(height: 8.0),
-              Wrap(
-                spacing: 8.0,
-                runSpacing: 8.0,
-                children: ContactInfoData.technologiesList
-                    .map((tech) => Chip(
-                          label: Text(tech, style: TextStyle(fontSize: 12.0)),
-                        ))
-                    .toList(),
-              ),
-              SizedBox(height: 16.0),
-              Text(
-                'EXPERIENCE',
-                style: TextStyle(
-                  fontSize: 14.0,
-                  fontWeight: FontWeight.bold,
-                ),
-              ),
-              SizedBox(height: 8.0),
-              Column(
-                crossAxisAlignment: CrossAxisAlignment.start,
+              pw.SizedBox(height: 8.0),
+              pw.Column(
                 children: [
-                  ExperienceItem(
-                    title:
-                        '${ContactInfoData.dateJoined ?? ''} - ${ContactInfoData.dateExit ?? ''}',
-                    company:
-                        '${ContactInfoData.companyName ?? ''} | ${ContactInfoData.cityDeclaration ?? ''}',
-                    position: '${ContactInfoData.designation ?? ''}',
-                    description: '${ContactInfoData.description ?? ''}',
+                  ...resumeData.technologiesList.map(
+                    (e) {
+                      return pw.Row(
+                        children: [
+                          pw.SizedBox(width: 80),
+                          pw.Text(e),
+                        ],
+                      );
+                    },
+                  )
+                ],
+              ),
+              pw.SizedBox(height: 16.0),
+              pw.Text(
+                'EXPERIENCE',
+                style: pw.TextStyle(
+                  fontSize: 14.0,
+                  fontWeight: pw.FontWeight.bold,
+                ),
+              ),
+              pw.SizedBox(height: 8.0),
+              pw.Column(
+                crossAxisAlignment: pw.CrossAxisAlignment.start,
+                children: [
+                  pw.Text(
+                    '${resumeData.dateJoined} - ${resumeData.dateExit}',
+                    style: pw.TextStyle(
+                        fontSize: 12.0, fontWeight: pw.FontWeight.bold),
+                  ),
+                  pw.Text(
+                    '${resumeData.companyName ?? ''} | ${resumeData.cityDeclaration ?? ''}',
+                    style: const pw.TextStyle(fontSize: 12.0),
+                  ),
+                  pw.Text(
+                    resumeData.designation ?? '',
+                    style: const pw.TextStyle(fontSize: 12.0),
+                  ),
+                  pw.Text(
+                    resumeData.description ?? '',
+                    style: const pw.TextStyle(fontSize: 10.0),
                   ),
                 ],
               ),
-              SizedBox(height: 16.0),
-              Text(
+              pw.SizedBox(height: 16.0),
+              pw.Text(
                 'REFERENCE',
-                style: TextStyle(
+                style: pw.TextStyle(
                   fontSize: 14.0,
-                  fontWeight: FontWeight.bold,
+                  fontWeight: pw.FontWeight.bold,
                 ),
               ),
-              SizedBox(height: 8.0),
-              Row(
+              pw.SizedBox(height: 8.0),
+              pw.Row(
                 children: [
-                  ReferenceItem(
-                    name: '${ContactInfoData.refranceName ?? ''}',
-                    title: '${ContactInfoData.designation ?? ''}',
-                    phone: '${ContactInfoData.phoneNum ?? ''}',
-                    email: '${ContactInfoData.email ?? ''}',
+                  pw.Container(
+                    padding: const pw.EdgeInsets.all(8.0),
+                    decoration: pw.BoxDecoration(
+                      border: pw.Border.all(color: PdfColors.grey),
+                      borderRadius: pw.BorderRadius.circular(8.0),
+                    ),
+                    child: pw.Column(
+                      crossAxisAlignment: pw.CrossAxisAlignment.start,
+                      children: [
+                        pw.Text(
+                          "${resumeData.name}",
+                          style: pw.TextStyle(
+                              fontSize: 12.0, fontWeight: pw.FontWeight.bold),
+                        ),
+                        pw.SizedBox(height: 4.0),
+                        pw.Text(
+                          "${resumeData.projectTitle}",
+                          style: const pw.TextStyle(fontSize: 12.0),
+                        ),
+                        pw.SizedBox(height: 4.0),
+                        pw.Text(
+                          'Phone: ${resumeData.phoneNum}',
+                          style: const pw.TextStyle(
+                            fontSize: 12.0,
+                          ),
+                        ),
+                        pw.Text(
+                          'Email: ${resumeData.email}',
+                          style: const pw.TextStyle(
+                            fontSize: 12.0,
+                          ),
+                        ),
+                      ],
+                    ),
                   ),
                 ],
               ),
             ],
-          ),
-        ),
+          );
+        },
       ),
     );
-  }
-}
 
-class ReferenceItem extends StatelessWidget {
-  final String name;
-  final String title;
-  final String phone;
-  final String email;
+    final output = await getTemporaryDirectory();
+    final file = File("${output.path}/first.pdf");
 
-  const ReferenceItem({
-    required this.name,
-    required this.title,
-    required this.phone,
-    required this.email,
-  });
-
-  @override
-  Widget build(BuildContext context) {
-    return Expanded(
-      child: Container(
-        padding: EdgeInsets.all(8.0),
-        decoration: BoxDecoration(
-          border: Border.all(color: Colors.grey),
-          borderRadius: BorderRadius.circular(8.0),
-        ),
-        child: Column(
-          crossAxisAlignment: CrossAxisAlignment.start,
-          children: [
-            Text(
-              name,
-              style: TextStyle(fontSize: 12.0, fontWeight: FontWeight.bold),
-            ),
-            SizedBox(height: 4.0),
-            Text(
-              title,
-              style: TextStyle(fontSize: 12.0),
-            ),
-            SizedBox(height: 4.0),
-            Text(
-              'Phone: $phone',
-              style: TextStyle(fontSize: 12.0),
-            ),
-            Text(
-              'Email: $email',
-              style: TextStyle(fontSize: 12.0),
-            ),
-          ],
-        ),
-      ),
-    );
-  }
-}
-
-class ExperienceItem extends StatelessWidget {
-  final String title;
-  final String company;
-  final String position;
-  final String description;
-
-  const ExperienceItem({
-    required this.title,
-    required this.company,
-    required this.position,
-    required this.description,
-  });
-
-  @override
-  Widget build(BuildContext context) {
-    return Column(
-      crossAxisAlignment: CrossAxisAlignment.start,
-      children: [
-        Text(
-          title,
-          style: TextStyle(fontSize: 12.0, fontWeight: FontWeight.bold),
-        ),
-        SizedBox(height: 4.0),
-        Text(
-          company,
-          style: TextStyle(fontSize: 12.0),
-        ),
-        Text(
-          position,
-          style: TextStyle(fontSize: 12.0),
-        ),
-        SizedBox(height: 4.0),
-        Text(
-          description,
-          style: TextStyle(fontSize: 10.0),
-        ),
-      ],
-    );
+    await file.writeAsBytes(await pdf.save());
   }
 }
