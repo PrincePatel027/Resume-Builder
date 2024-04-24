@@ -19,6 +19,8 @@ Resume Builder is a mobile application built using Flutter framework that allows
 
 ![Artboard 1](https://github.com/PrincePatel027/Resume-Builder/assets/149999800/cf3e1f38-b076-4554-a493-068412f146ef)
 
+https://github.com/PrincePatel027/Resume-Builder/assets/149999800/62731867-c454-4bf4-8dbe-53bc0050f6f3
+
 ## Getting Started
 
 1. **Clone the repository**:
